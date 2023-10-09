@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  vouch:
+    image: quay.io/vouch/vouch-proxy:latest
+    volumes:
+      - ./vouch/config.yaml:/config/config.yml
+    networks:
+      - penpot
+    # ports:
+    #   - 9090:9090
+  nginx:
+    image: nginx
+    depends_on:
+      - vouch
+    volumes:
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    ports:
+      - 9091:80
+    networks:
+      - penpot
+
+networks:
+  penpot:
+    name: penpot_penpot
+    external: true
