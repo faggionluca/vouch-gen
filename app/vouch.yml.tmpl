@@ -1,23 +1,23 @@
 {{- $currentcontainer := where $ "ID" $.Docker.CurrentContainerID | first }}
 
-{{- $domains := index $currentcontainer.Labels "vouch.auth.domains" | default "localhost"  }}
+{{- $domains := index $currentcontainer.Labels "vouch.domains" | default "localhost"  }}
 {{- $domains = split $domains ","}}
 
-{{- $cookieDomain := index $currentcontainer.Labels "vouch.auth.cookie.domain" | default "localhost"  }}
-{{- $cookieSecure := parseBool ((index $currentcontainer.Labels "vouch.auth.cookie.secure") | default "false") }}
+{{- $cookieDomain := index $currentcontainer.Labels "vouch.cookie.domain" | default "localhost"  }}
+{{- $cookieSecure := parseBool ((index $currentcontainer.Labels "vouch.cookie.secure") | default "false") }}
 
-{{- $allowall := parseBool ((index $currentcontainer.Labels "vouch.auth.allowAllUsers") | default "false") }}
+{{- $allowall := parseBool ((index $currentcontainer.Labels "vouch.allowAllUsers") | default "false") }}
 
 {{- $client_id := (index  $currentcontainer.Env "CLIENT_ID") | default ""}}
 {{- $client_secret := (index  $currentcontainer.Env "CLIENT_SECRET") | default ""}}
 
-{{- $port := (index $currentcontainer.Labels "vouch.auth.port") | default "9090"}}
+{{- $port := (index $currentcontainer.Labels "vouch.port") | default "9090"}}
 
-{{- $testing := parseBool ((index $currentcontainer.Labels "vouch.auth.debug") | default "false") }}
-{{- $log_level := (index $currentcontainer.Labels "vouch.auth.logLevel") | default "info"}}
-{{- $document_root := (index $currentcontainer.Labels "vouch.auth.document_root") | default ""}}
+{{- $testing := parseBool ((index $currentcontainer.Labels "vouch.debug") | default "false") }}
+{{- $log_level := (index $currentcontainer.Labels "vouch.logLevel") | default "info"}}
+{{- $document_root := (index $currentcontainer.Labels "vouch.document_root") | default ""}}
 
-{{- $teamWhitelist := (index $currentcontainer.Labels "vouch.auth.teamWhitelist") | default ""}}
+{{- $teamWhitelist := (index $currentcontainer.Labels "vouch.teamWhitelist") | default ""}}
 {{- $teamWhitelist = split $teamWhitelist ","}}
 {{/* 
 # Vouch Proxy configuration
