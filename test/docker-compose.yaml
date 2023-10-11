@@ -19,6 +19,8 @@ services:
       - raider.auth.domains=localhost
       - raider.auth.debug=true
       - raider.auth.log_level=debug
+      - raider.auth.document_root=/sso
+      - raider.auth.teamWhitelist=Raider-Arts/Caprover-Admins
     networks:
       - base
 

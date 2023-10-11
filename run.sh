@@ -29,9 +29,8 @@
 
 id=$(docker run -d \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -l raider.auth.cookie.domain=localhost \
-  -l raider.auth.cookie.secure=false \
-  -l raider.auth.allowAllUsers=true \
+  -l vouch.auth.cookie.secure=false \
+  -l "vouch.auth.teamWhitelist=Raider-Arts/Caprover-Admins" \
   --env-file .env \
   -p 6090:9090 \
   raiderauth)
