@@ -21,7 +21,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ghcr.io/darkimage/vouch-gen
+            ghcr.io/faggionluca/vouch-gen
           tags: |
             type=ref,event=branch
             type=ref,event=pr
