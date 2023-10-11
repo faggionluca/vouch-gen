@@ -15,6 +15,7 @@
 
 {{- $testing := parseBool ((index $currentcontainer.Labels "raider.auth.debug") | default "false") }}
 {{- $log_level := (index $currentcontainer.Labels "raider.auth.log_level") | default "info"}}
+{{- $document_root := (index $currentcontainer.Labels "raider.auth.document_root") | default ""}}
 {{/* 
 # Vouch Proxy configuration
 # bare minimum to get Vouch Proxy running with github 
@@ -24,6 +25,7 @@ vouch:
   port: {{ $port }}
   testing: {{ $testing }}
   loglevel: {{ $log_level }}
+  document_root:  {{ $document_root }}
   {{/*
   # domains:
   # valid domains that the jwt cookies can be set into

@@ -1,9 +1,9 @@
 location = /test {
-  proxy_pass http://vouch:9090/login;
+  proxy_pass http://vouch-gen:9090/login;
 }
 
 location ^~ /sso {
-  proxy_pass http://vouch:9090; # must not! have a slash at the end
+  proxy_pass http://vouch-gen:9090; # must not! have a slash at the end
   proxy_set_header Host $http_host;
   proxy_pass_request_body off;
   proxy_set_header Content-Length "";
@@ -29,5 +29,5 @@ location @error401 {
 # # used when running vouch-proxy with `testing: true`
 location /static/ {
   proxy_set_header Host $http_host;
-  proxy_pass http://vouch:9090/static/;
+  proxy_pass http://vouch-gen:9090/static/;
 }

@@ -1,26 +1,35 @@
 version: '3'
 
 services:
-  vouch:
-    image: quay.io/vouch/vouch-proxy:latest
+  # vouch:
+  #   image: quay.io/vouch/vouch-proxy:latest
+  #   volumes:
+  #     - ./vouch/config.yaml:/config/config.yml
+  #   networks:
+  #     - penpot
+  #   # ports:
+  #   #   - 9090:9090
+  vouch-gen:
+    image: ghcr.io/faggionluca/vouch-gen:main
     volumes:
-      - ./vouch/config.yaml:/config/config.yml
+      - /var/run/docker.sock:/var/run/docker.sock
+    env_file:
+      - .env
+    labels:
+      - raider.auth.domains=localhost
+      - raider.auth.debug=true
+      - raider.auth.log_level=debug
     networks:
-      - penpot
-    # ports:
-    #   - 9090:9090
+      - base
+
   nginx:
     image: nginx
-    depends_on:
-      - vouch
     volumes:
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     ports:
       - 9091:80
     networks:
-      - penpot
+      - base
 
 networks:
-  penpot:
-    name: penpot_penpot
-    external: true
+  base:
